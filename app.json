@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "Vaccine Notifs",
+    "slug": "vax-notifications",
+    "version": "1.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#6c6cbd"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.elixirlabs.vaccinenotifications",
+      "buildNumber": "1.1.0"
+    },
+    "android": {
+      "package": "com.elixirlabs.vaccinenotifications",
+      "versionCode": 2,
+      "permissions": [],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#6c6cbd"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
