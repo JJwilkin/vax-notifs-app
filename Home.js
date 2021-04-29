@@ -2,7 +2,7 @@ import Constants from 'expo-constants';
 import AppLoading from "expo-app-loading";
 import * as Notifications from 'expo-notifications';
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, StatusBar, Platform, SafeAreaView, Button, Image } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Platform, SafeAreaView, Image, TouchableOpacity } from 'react-native';
 import { storeData, getData } from './helpers/AsyncHelpers';
 import {
   useFonts,
@@ -44,11 +44,12 @@ export default function Home (props) {
             <View style={styles.textContainer}>
               <Image style={styles.homeImage} source={require("./assets/home-image.png")}/>
               <Text style={styles.welcome}>Get Notified</Text>
-              <Text style={styles.steps}>1. Please enable push notifications to receive vaccine news</Text>
-              <Text style={styles.steps}>2. Please enable push notifications to receive vaccine news</Text>
-              <Text style={styles.steps}>3. Please enable push notifications to receive vaccine news</Text>
+              <Text style={styles.enableText}>To receive vaccine news please enable push notifications. </Text>
+              <Text style={styles.enableText}>You can opt-out of notifications or update your preferences at any time.</Text>
             </View>
-            <Button title="Enable Notifications" onPress={handleEnableNotifications}/>
+            <TouchableOpacity style={styles.button} onPress={handleEnableNotifications}>
+              <Text style={styles.buttonText}>Enable Notifications</Text>
+            </ TouchableOpacity>
         </SafeAreaView>
       )
     }
@@ -103,15 +104,26 @@ const styles = StyleSheet.create({
   welcome: {
     fontFamily: "DMSans_700Bold",
     fontSize: 40,
-    margin: 15
+    margin: 15,
+  },
+  button: {
+    backgroundColor: "rgb(59, 60, 212)",
+    paddingHorizontal: 24,
+    paddingVertical: 16,
+    borderRadius: 10,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 18,
+    fontFamily: "DMSans_500Medium"
   },
   homeImage: {
     width: "80%",
     height: "50%"
   },
-  steps: {
+  enableText: {
     fontSize: 18,
     fontFamily: "DMSans_500Medium",
-    paddingVertical: 10
-  }
+    paddingVertical: 10,
+  },
 });
