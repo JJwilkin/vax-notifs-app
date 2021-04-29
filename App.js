@@ -1,4 +1,5 @@
 import Constants from "expo-constants";
+import { AppLoading } from "expo";
 import * as Notifications from "expo-notifications";
 import React, { useState, useEffect, useRef } from "react";
 import { StyleSheet, Text, View, StatusBar, Platform } from "react-native";
@@ -25,7 +26,7 @@ export default function App() {
 
   useEffect(() => {
     async function setUp () {
-      // await clear();
+      await clear();
       const token = await getData("ExpoPushToken");
 
       if (token) {

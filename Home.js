@@ -1,12 +1,29 @@
 import Constants from 'expo-constants';
+import AppLoading from "expo-app-loading";
 import * as Notifications from 'expo-notifications';
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, StatusBar, Platform, SafeAreaView, Button } from 'react-native';
-import { storeData, getData} from './helpers/AsyncHelpers';
+import { StyleSheet, Text, View, StatusBar, Platform, SafeAreaView, Button, Image } from 'react-native';
+import { storeData, getData } from './helpers/AsyncHelpers';
+import {
+  useFonts,
+  DMSans_400Regular,
+  DMSans_400Regular_Italic,
+  DMSans_500Medium,
+  DMSans_500Medium_Italic,
+  DMSans_700Bold,
+  DMSans_700Bold_Italic,
+} from '@expo-google-fonts/dm-sans';
 
 export default function Home (props) {
-    
     const {setExpoPushToken} = props;
+    let [fontsLoaded] = useFonts({
+      DMSans_400Regular,
+      DMSans_400Regular_Italic,
+      DMSans_500Medium,
+      DMSans_500Medium_Italic,
+      DMSans_700Bold,
+      DMSans_700Bold_Italic,
+    });
 
     const handleEnableNotifications = () => {
         registerForPushNotificationsAsync().then((token) => {
@@ -16,23 +33,26 @@ export default function Home (props) {
             // setNotificationsEnabled(true);
         })
     }
-    return (
-        <SafeAreaView styles={styles.container}>
-            <Text>Welcome</Text>
-            <Text>Please enable push notifications to receive vaccine news</Text>
+
+    if (!fontsLoaded) {
+      console.log(fontsLoaded)
+      return (<AppLoading />)
+    } else {
+      console.log(fontsLoaded)
+      return (
+        <SafeAreaView style={styles.container}>
+            <View style={styles.textContainer}>
+              <Image style={styles.homeImage} source={require("./assets/home-image.png")}/>
+              <Text style={styles.welcome}>Get Notified</Text>
+              <Text style={styles.steps}>1. Please enable push notifications to receive vaccine news</Text>
+              <Text style={styles.steps}>2. Please enable push notifications to receive vaccine news</Text>
+              <Text style={styles.steps}>3. Please enable push notifications to receive vaccine news</Text>
+            </View>
             <Button title="Enable Notifications" onPress={handleEnableNotifications}/>
         </SafeAreaView>
-    )
+      )
+    }
 }
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });
 
   async function registerForPushNotificationsAsync() {
     let token;
@@ -66,3 +86,32 @@ const styles = StyleSheet.create({
   
     return token;
   }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginVertical: 80,
+    marginHorizontal: 24
+  },
+  textContainer: {
+    width: "100%",
+    alignItems: "center"
+  },
+  welcome: {
+    fontFamily: "DMSans_700Bold",
+    fontSize: 40,
+    margin: 15
+  },
+  homeImage: {
+    width: "80%",
+    height: "50%"
+  },
+  steps: {
+    fontSize: 18,
+    fontFamily: "DMSans_500Medium",
+    paddingVertical: 10
+  }
+});
