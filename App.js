@@ -2,12 +2,11 @@ import Constants from "expo-constants";
 import { AppLoading } from "expo";
 import * as Notifications from "expo-notifications";
 import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, Text, View, StatusBar, Platform } from "react-native";
+import { StyleSheet, Text, View, StatusBar, Platform, LogBox } from "react-native";
 import { WebView } from "react-native-webview";
 import Landing from "./Landing";
 import HomePage from './HomePage';
 import { getData, clear} from './helpers/AsyncHelpers';
-
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -15,14 +14,14 @@ Notifications.setNotificationHandler({
     shouldSetBadge: false,
   }),
 });
+LogBox.ignoreAllLogs(); // Ignore log notification by message
 
 export default function App() {
   const [expoPushToken, setExpoPushToken] = useState("");
   const [notification, setNotification] = useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const [handleNotification, setHandleNotification] = useState();
-  const notificationListener = useRef();
-  const responseListener = useRef();
+  
 
   StatusBar.setBarStyle("dark-content");
 
