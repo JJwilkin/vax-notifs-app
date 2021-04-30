@@ -4,7 +4,8 @@ import * as Notifications from "expo-notifications";
 import React, { useState, useEffect, useRef } from "react";
 import { StyleSheet, Text, View, StatusBar, Platform } from "react-native";
 import { WebView } from "react-native-webview";
-import Home from "./Home";
+import Landing from "./Landing";
+import HomePage from './HomePage';
 import { getData, clear} from './helpers/AsyncHelpers';
 
 Notifications.setNotificationHandler({
@@ -19,6 +20,7 @@ export default function App() {
   const [expoPushToken, setExpoPushToken] = useState("");
   const [notification, setNotification] = useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  const [handleNotification, setHandleNotification] = useState();
   const notificationListener = useRef();
   const responseListener = useRef();
 
@@ -26,7 +28,7 @@ export default function App() {
 
   useEffect(() => {
     async function setUp () {
-      await clear();
+      // await clear();
       const token = await getData("ExpoPushToken");
 
       if (token) {
@@ -36,29 +38,32 @@ export default function App() {
 
       }
 
-      // This listener is fired whenever a notification is received while the app is foregrounded
-    notificationListener.current = Notifications.addNotificationReceivedListener(
-      (notification) => {
-        setNotification(notification);
-      }
-    );
+    //   // This listener is fired whenever a notification is received while the app is foregrounded
+    // notificationListener.current = Notifications.addNotificationReceivedListener(
+    //   (notification) => {
+    //     setNotification(notification);
+    //     // console.log(response);
+    //     handleNotification.navigate('History');
+    //   }
+    // );
 
-    // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
-    responseListener.current = Notifications.addNotificationResponseReceivedListener(
-      (response) => {
-        console.log(response);
-      }
-    );
+    // // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
+    // responseListener.current = Notifications.addNotificationResponseReceivedListener(
+    //   (response) => {
+    //     // console.log(response);
+    //     handleNotification.navigate('History');
+    //   }
+    // );
     }
 
     setUp();
 
-    return () => {
-      Notifications.removeNotificationSubscription(
-        notificationListener.current
-      );
-      Notifications.removeNotificationSubscription(responseListener.current);
-    };
+    // return () => {
+    //   Notifications.removeNotificationSubscription(
+    //     notificationListener.current
+    //   );
+    //   Notifications.removeNotificationSubscription(responseListener.current);
+    // };
   }, []);
 
   useEffect(()=> {
@@ -73,14 +78,9 @@ export default function App() {
   return (
     <>
       {notificationsEnabled ? (
-        <WebView
-          source={{ uri: "http://192.168.0.165:3000/dashboard" }}
-          style={{ marginTop: 20 }}
-          javaScriptEnabled={true}
-          injectedJavaScript={jsCode}
-        />
+        <HomePage jsCode={jsCode} setHandleNotification={setHandleNotification}/>
       ) : (
-        <Home setExpoPushToken={setExpoPushToken}/>
+        <Landing setExpoPushToken={setExpoPushToken}/>
       )}
     </>
   );

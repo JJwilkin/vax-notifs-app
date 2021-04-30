@@ -14,7 +14,7 @@ import {
   DMSans_700Bold_Italic,
 } from '@expo-google-fonts/dm-sans';
 
-export default function Home (props) {
+export default function Landing (props) {
     const {setExpoPushToken} = props;
     let [fontsLoaded] = useFonts({
       DMSans_400Regular,
@@ -67,7 +67,7 @@ export default function Home (props) {
         finalStatus = status;
       }
       if (finalStatus !== "granted") {
-        alert("Failed to get push token for push notification!");
+        alert("Please enable notifications for this app in the settings");
         return;
       }
       token = (await Notifications.getExpoPushTokenAsync()).data;
