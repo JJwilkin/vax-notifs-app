@@ -2,7 +2,7 @@ import Constants from 'expo-constants';
 import AppLoading from "expo-app-loading";
 import { WebView } from "react-native-webview";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Entypo } from '@expo/vector-icons';
+import { Entypo, AntDesign, } from '@expo/vector-icons';
 import * as Notifications from 'expo-notifications';
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, Text, View, StatusBar, Platform, SafeAreaView, Image, TouchableOpacity, ScrollView } from 'react-native';
@@ -24,6 +24,16 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, useIsFocused } from '@react-navigation/native';
 
 StatusBar.setBarStyle("dark-content");
+
+function InfoScreen({route}) {
+    return (
+        <WebView
+            source={{ uri: "http://192.168.0.81:3000/" }}
+
+        />
+    );
+  }
+
 function HomeScreen({jsCode, navigation}) {
     const isFocused = useIsFocused();
     const notificationListener = useRef();
@@ -45,7 +55,7 @@ function HomeScreen({jsCode, navigation}) {
           console.log(response.notification.request.content.data.message);
           const message = response.notification.request.content.data.message;
           const body = response.notification.request.content.body;
-          navigation.navigate('History', {message: body});
+          navigation.navigate('Alerts', {message: body});
         }
         
       );
@@ -105,24 +115,32 @@ function HomeScreen({jsCode, navigation}) {
   
   const Tab = createBottomTabNavigator();
   
-  export default function HomePage({jsCode}) {
-      
+  export default function HomePage({ jsCode }) {
     return (
       <NavigationContainer>
         <Tab.Navigator
+          initialRouteName="Dashboard"
           tabBarOptions={{
             activeTintColor: "#6161b5",
             keyboardHidesTabBar: false,
           }}
         >
           <Tab.Screen
+            name="Info"
+            component={InfoScreen}
+            options={{
+              tabBarLabel: "Info",
+              tabBarIcon: ({ color }) => (
+                <Entypo name="info-with-circle" size={27} color={color} />
+              ),
+            }}
+          />
+          <Tab.Screen
             name="Dashboard"
             // component={HomeScreen}
-            children={({navigation}) => (
-                <HomeScreen
-                    jsCode={jsCode} navigation={navigation}
-                />
-              )}
+            children={({ navigation }) => (
+              <HomeScreen jsCode={jsCode} navigation={navigation} />
+            )}
             options={{
               tabBarLabel: "Dashboard",
               tabBarIcon: ({ color }) => (
@@ -131,7 +149,7 @@ function HomeScreen({jsCode, navigation}) {
             }}
           />
           <Tab.Screen
-            name="History"
+            name="Alerts"
             component={SettingsScreen}
             // children={() => (
             //     <SettingsScreen
@@ -139,14 +157,14 @@ function HomeScreen({jsCode, navigation}) {
             //     />
             //   )}
             options={{
-              tabBarLabel: "History",
+              tabBarLabel: "Alerts",
               tabBarIcon: ({ color }) => (
                 <Entypo name="list" size={27} color={color} />
               ),
             }}
           />
         </Tab.Navigator>
-    </NavigationContainer>
+      </NavigationContainer>
     );
   }
 
