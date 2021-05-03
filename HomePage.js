@@ -20,8 +20,9 @@ import {
   DMSans_700Bold_Italic,
 } from '@expo-google-fonts/dm-sans';
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, useIsFocused } from '@react-navigation/native';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+const Tab = createMaterialBottomTabNavigator();
 
 StatusBar.setBarStyle("dark-content");
 
@@ -34,7 +35,7 @@ function InfoScreen({route}) {
     );
   }
 
-function HomeScreen({jsCode, navigation}) {
+function HomeScreen({jsCode, navigation, setSignedIn}) {
     const isFocused = useIsFocused();
     const notificationListener = useRef();
     const responseListener = useRef();
@@ -67,24 +68,33 @@ function HomeScreen({jsCode, navigation}) {
         Notifications.removeNotificationSubscription(responseListener.current);
       };
     }, [])
+    function onMessage(event) {
+      //Prints out data that was passed.
+      const data = JSON.parse(event.nativeEvent.data)
+      setSignedIn(data.isSignedIn)
+    }
+
     return (
         <>
             <WebView
                 source={{ uri: "http://192.168.0.81:3000/dashboard" }}
                 javaScriptEnabled={true}
-                onMessage={() => {}}
+                onMessage={onMessage}
                 injectedJavaScript={jsCode}
             />
         </>
     );
   }
   
-  function SettingsScreen({route}) {
+  function SettingsScreen({route, signedIn, navigation}) {
     const isFocused = useIsFocused();
     const message = route?.params?.message;
     const [showView, setShowView] = useState(true);
     const [previousMessage, setPreviousMessage] = useState("");
-
+    function onMessage(event) {
+      //Prints out data that was passed.
+      console.log(event.nativeEvent.data);
+    }
     useEffect(()=> {
         // console.log(message)
         // console.log(previousMessage);
@@ -100,26 +110,40 @@ function HomeScreen({jsCode, navigation}) {
     }
     return (
         <>
-            {(showView) &&
+            {signedIn ? showView &&
                 <WebView
                     source={{ uri: "http://192.168.0.81:3000/resetpass" }}
                     javaScriptEnabled={true}
-                    onMessage={() => {}}
+                    onMessage={onMessage}
                     injectedJavaScript={`alert("${message}");`}
                 />
+                : 
+                <SafeAreaView style={styles.fullScreenContainer}>
+                  <View style={styles.textContainer}>
+                    <Image style={styles.homeImage} source={require("./assets/mobile-login-pana.png")}/>
+                    <Text style={styles.welcome}>Sign Up</Text>
+                    <Text style={styles.enableText}>To view alerts, sign up through the Dashboard!</Text>
+                  </View>
+                  <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate('Dashboard')}>
+                    <Text style={styles.buttonText}>View Dashboard</Text>
+                  </ TouchableOpacity>
+              </SafeAreaView>
            }
         </>
         
     );
   }
-  
-  const Tab = createBottomTabNavigator();
+
   
   export default function HomePage({ jsCode }) {
+    const [signedIn, setSignedIn] = useState(false);
     return (
       <NavigationContainer>
         <Tab.Navigator
+          
           initialRouteName="Dashboard"
+          barStyle={{ backgroundColor: "rgb(59, 60, 212)" }}
+          shifting={true}
           tabBarOptions={{
             activeTintColor: "#6161b5",
             keyboardHidesTabBar: false,
@@ -131,7 +155,7 @@ function HomeScreen({jsCode, navigation}) {
             options={{
               tabBarLabel: "Info",
               tabBarIcon: ({ color }) => (
-                <Entypo name="info-with-circle" size={27} color={color} />
+                <Entypo name="info-with-circle" size={24} color={color} />
               ),
             }}
           />
@@ -139,7 +163,7 @@ function HomeScreen({jsCode, navigation}) {
             name="Dashboard"
             // component={HomeScreen}
             children={({ navigation }) => (
-              <HomeScreen jsCode={jsCode} navigation={navigation} />
+              <HomeScreen jsCode={jsCode} navigation={navigation}  setSignedIn={setSignedIn} />
             )}
             options={{
               tabBarLabel: "Dashboard",
@@ -150,12 +174,12 @@ function HomeScreen({jsCode, navigation}) {
           />
           <Tab.Screen
             name="Alerts"
-            component={SettingsScreen}
-            // children={() => (
-            //     <SettingsScreen
-            //     jsCode={jsCode}
-            //     />
-            //   )}
+            // component={SettingsScreen}
+            children={({route, navigation}) => (
+                <SettingsScreen
+                jsCode={jsCode} route={route} signedIn={signedIn} navigation={navigation}
+                />
+              )}
             options={{
               tabBarLabel: "Alerts",
               tabBarIcon: ({ color }) => (
@@ -199,4 +223,44 @@ function HomeScreen({jsCode, navigation}) {
       backgroundColor: "#F5FCFF",
       padding: 24,
     },
+    fullScreenContainer: {
+      flex: 1,
+      backgroundColor: "#fff",
+      alignItems: "center",
+      justifyContent: "center",
+      
+    },
+    textContainer: {
+      width: "93%",
+      alignItems: "center",
+    },
+    welcome: {
+      fontFamily: "DMSans_700Bold",
+      fontSize: 40,
+      margin: 15,
+    },
+    button: {
+      backgroundColor: "rgb(59, 60, 212)",
+      paddingHorizontal: 24,
+      paddingVertical: 16,
+      borderRadius: 10,
+    },
+    buttonText: {
+      color: "white",
+      fontSize: 18,
+      fontFamily: "DMSans_500Medium"
+    },
+    homeImage: {
+      width: "80%",
+      height: "50%"
+    },
+    enableText: {
+      fontSize: 18,
+      fontFamily: "DMSans_500Medium",
+      paddingVertical: 10,
+    },
+  });
+
+  const styles2 = StyleSheet.create({
+    
   });
