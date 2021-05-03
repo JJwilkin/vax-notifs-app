@@ -22,6 +22,7 @@ import {
 
 import { NavigationContainer, useIsFocused } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+const signUpImage = require("./assets/mobile-login-pana.png");
 const Tab = createMaterialBottomTabNavigator();
 
 StatusBar.setBarStyle("dark-content");
@@ -120,7 +121,7 @@ function HomeScreen({jsCode, navigation, setSignedIn}) {
                 : 
                 <SafeAreaView style={styles.fullScreenContainer}>
                   <View style={styles.textContainer}>
-                    <Image style={styles.homeImage} source={require("./assets/mobile-login-pana.png")}/>
+                    <Image style={styles.homeImage} source={signUpImage}/>
                     <Text style={styles.welcome}>Sign Up</Text>
                     <Text style={styles.enableText}>To view alerts, sign up through the Dashboard!</Text>
                   </View>
@@ -231,6 +232,7 @@ function HomeScreen({jsCode, navigation, setSignedIn}) {
       
     },
     textContainer: {
+
       width: "93%",
       alignItems: "center",
     },
@@ -251,8 +253,8 @@ function HomeScreen({jsCode, navigation, setSignedIn}) {
       fontFamily: "DMSans_500Medium"
     },
     homeImage: {
-      width: "80%",
-      height: "50%"
+      width: "70%",
+      height: "55%"
     },
     enableText: {
       fontSize: 18,
