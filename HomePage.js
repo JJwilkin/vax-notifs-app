@@ -113,7 +113,7 @@ function HomeScreen({jsCode, navigation, setSignedIn}) {
                     <Text style={styles.enableText}>To view alerts, sign up through the Dashboard!</Text>
                   </View>
                   <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate('Dashboard')}>
-                    <Text style={styles.buttonText}>View Dashboard</Text>
+                    <Text style={styles.buttonText}>Sign Up</Text>
                   </ TouchableOpacity>
               </SafeAreaView>
            }
