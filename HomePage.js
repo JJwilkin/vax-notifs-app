@@ -27,10 +27,12 @@ const Tab = createMaterialBottomTabNavigator();
 
 StatusBar.setBarStyle("dark-content");
 
+const hostUrl = "https://vaccinenotifications.org/"
+
 function InfoScreen({route}) {
     return (
         <WebView
-            source={{ uri: "http://192.168.0.81:3000/" }}
+            source={{ uri: hostUrl }}
 
         />
     );
@@ -63,7 +65,7 @@ function HomeScreen({jsCode, navigation, setSignedIn}) {
     return (
         <>
             <WebView
-                source={{ uri: "https://vaccinenotifications.org/dashboard" }}
+                source={{ uri: `${hostUrl}dashboard` }}
                 javaScriptEnabled={true}
                 onMessage={onMessage}
                 injectedJavaScript={jsCode}
@@ -100,7 +102,7 @@ function HomeScreen({jsCode, navigation, setSignedIn}) {
         <>
             {signedIn ? showView &&
                 <WebView
-                    source={{ uri: "https://vaccinenotifications.org/alerts" }}
+                    source={{ uri: `${hostUrl}alerts` }}
                     javaScriptEnabled={true}
                     onMessage={onMessage}
                     injectedJavaScript={jsCode}
@@ -248,8 +250,4 @@ function HomeScreen({jsCode, navigation, setSignedIn}) {
       fontFamily: "DMSans_500Medium",
       paddingVertical: 10,
     },
-  });
-
-  const styles2 = StyleSheet.create({
-    
   });

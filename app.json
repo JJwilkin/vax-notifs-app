@@ -4,6 +4,9 @@
     "slug": "vax-notifications",
     "version": "4.0.0",
     "orientation": "portrait",
+    "notification": {
+      "icon":"./assets/notification-icon.png"
+    },
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
@@ -23,6 +26,7 @@
     },
     "android": {
       "package": "com.elixirlabs.vaccinenotifications",
+      "googleServicesFile": "./google-services.json",
       "versionCode": 4,
       "permissions": [],
       "adaptiveIcon": {
