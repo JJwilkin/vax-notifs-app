@@ -41,31 +41,16 @@ function HomeScreen({jsCode, navigation, setSignedIn}) {
     const notificationListener = useRef();
     const responseListener = useRef();
     useEffect(()=> {
-
-        // This listener is fired whenever a notification is received while the app is foregrounded
-    // notificationListener.current = Notifications.addNotificationReceivedListener(
-    //     (response) => {
-
-    //       console.log(response);
-    //       navigation.navigate('History', {message: Math.random()});
-    //     }
-    //   );
-  
       // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
       responseListener.current = Notifications.addNotificationResponseReceivedListener(
         (response) => {
-          console.log(response.notification.request.content.data.message);
-          const message = response.notification.request.content.data.message;
-          const body = response.notification.request.content.body;
-          navigation.navigate('Alerts', {message: body});
+          const data = response.notification.request.content.data
+          navigation.navigate('Alerts', {message: data});
         }
         
       );
 
       return () => {
-        // Notifications.removeNotificationSubscription(
-        //   notificationListener.current
-        // );
         Notifications.removeNotificationSubscription(responseListener.current);
       };
     }, [])
@@ -78,7 +63,7 @@ function HomeScreen({jsCode, navigation, setSignedIn}) {
     return (
         <>
             <WebView
-                source={{ uri: "http://192.168.0.81:3000/dashboard" }}
+                source={{ uri: "https://vaccinenotifications.org/dashboard" }}
                 javaScriptEnabled={true}
                 onMessage={onMessage}
                 injectedJavaScript={jsCode}
@@ -93,12 +78,11 @@ function HomeScreen({jsCode, navigation, setSignedIn}) {
     const [showView, setShowView] = useState(true);
     const [previousMessage, setPreviousMessage] = useState("");
     function onMessage(event) {
-      //Prints out data that was passed.
-      console.log(event.nativeEvent.data);
+      // Prints out data that was passed.
+      // console.log(event.nativeEvent.data);
     }
     useEffect(()=> {
-        // console.log(message)
-        // console.log(previousMessage);
+
         if (previousMessage != message) {
             setPreviousMessage(message);
             reset();
@@ -109,14 +93,17 @@ function HomeScreen({jsCode, navigation, setSignedIn}) {
         setShowView(false);
         setTimeout(()=> setShowView(true), 250);
     }
+
+    let jsCode = message ? `window.localStorage.setItem("newMessage", '${JSON.stringify(message)}')` : ``
+
     return (
         <>
             {signedIn ? showView &&
                 <WebView
-                    source={{ uri: "http://192.168.0.81:3000/resetpass" }}
+                    source={{ uri: "https://vaccinenotifications.org/alerts" }}
                     javaScriptEnabled={true}
                     onMessage={onMessage}
-                    injectedJavaScript={`alert("${message}");`}
+                    injectedJavaScript={jsCode}
                 />
                 : 
                 <SafeAreaView style={styles.fullScreenContainer}>

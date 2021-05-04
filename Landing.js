@@ -27,7 +27,6 @@ export default function Landing (props) {
 
     const handleEnableNotifications = () => {
         registerForPushNotificationsAsync().then((token) => {
-            console.log('this is token:', token)
             storeData("ExpoPushToken", token);
             setExpoPushToken(token);
             // setNotificationsEnabled(true);
@@ -71,7 +70,6 @@ export default function Landing (props) {
         return;
       }
       token = (await Notifications.getExpoPushTokenAsync()).data;
-      console.log(token);
     } else {
       alert("Must use physical device for Push Notifications");
     }

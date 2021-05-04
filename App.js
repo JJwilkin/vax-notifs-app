@@ -31,38 +31,12 @@ export default function App() {
       const token = await getData("ExpoPushToken");
 
       if (token) {
-        console.log('this is token: ', token);
         setExpoPushToken(token);
         setNotificationsEnabled(true);
 
       }
-
-    //   // This listener is fired whenever a notification is received while the app is foregrounded
-    // notificationListener.current = Notifications.addNotificationReceivedListener(
-    //   (notification) => {
-    //     setNotification(notification);
-    //     // console.log(response);
-    //     handleNotification.navigate('History');
-    //   }
-    // );
-
-    // // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
-    // responseListener.current = Notifications.addNotificationResponseReceivedListener(
-    //   (response) => {
-    //     // console.log(response);
-    //     handleNotification.navigate('History');
-    //   }
-    // );
     }
-
     setUp();
-
-    // return () => {
-    //   Notifications.removeNotificationSubscription(
-    //     notificationListener.current
-    //   );
-    //   Notifications.removeNotificationSubscription(responseListener.current);
-    // };
   }, []);
 
   useEffect(()=> {
@@ -72,7 +46,7 @@ export default function App() {
   }, [expoPushToken])
 
   
-  let jsCode = `localStorage.setItem('ExpoToken', '${expoPushToken}');`;
+  let jsCode = `window.localStorage.setItem('ExpoToken', '${expoPushToken}');`;
 
   return (
     <>
