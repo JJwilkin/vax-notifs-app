@@ -101,8 +101,9 @@ const styles = StyleSheet.create({
   },
   welcome: {
     fontFamily: "DMSans_700Bold",
-    fontSize: 40,
+    fontSize: 32,
     margin: 15,
+    color: "#343a40"
   },
   button: {
     backgroundColor: "rgb(59, 60, 212)",
@@ -121,7 +122,8 @@ const styles = StyleSheet.create({
   },
   enableText: {
     fontSize: 18,
-    fontFamily: "DMSans_500Medium",
+    fontFamily: "DMSans_400Regular",
     paddingVertical: 10,
+    color: "#343a40",
   },
 });

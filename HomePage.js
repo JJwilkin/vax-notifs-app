@@ -111,11 +111,11 @@ function HomeScreen({jsCode, navigation, setSignedIn}) {
                 <SafeAreaView style={styles.fullScreenContainer}>
                   <View style={styles.textContainer}>
                     <Image style={styles.homeImage} source={signUpImage}/>
-                    <Text style={styles.welcome}>Sign Up</Text>
-                    <Text style={styles.enableText}>To view alerts, sign up through the Dashboard!</Text>
+                    <Text style={styles.welcome}>Sign Up/Log In</Text>
+                    <Text style={styles.enableText}>To view alerts, sign up with the eligibility groups and regions you'd like updates for, or sign in to your account.</Text>
                   </View>
                   <TouchableOpacity style={styles.button} onPress={()=> navigation.navigate('Dashboard')}>
-                    <Text style={styles.buttonText}>Sign Up</Text>
+                    <Text style={styles.buttonText}>Sign Up or Log In</Text>
                   </ TouchableOpacity>
               </SafeAreaView>
            }
@@ -221,14 +221,14 @@ function HomeScreen({jsCode, navigation, setSignedIn}) {
       
     },
     textContainer: {
-
       width: "93%",
       alignItems: "center",
     },
     welcome: {
       fontFamily: "DMSans_700Bold",
-      fontSize: 40,
+      fontSize: 32,
       margin: 15,
+      color: "#343a40",
     },
     button: {
       backgroundColor: "rgb(59, 60, 212)",
@@ -247,7 +247,8 @@ function HomeScreen({jsCode, navigation, setSignedIn}) {
     },
     enableText: {
       fontSize: 18,
-      fontFamily: "DMSans_500Medium",
+      fontFamily: "DMSans_400Regular",
       paddingVertical: 10,
+      color: "#343a40",
     },
   });
