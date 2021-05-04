@@ -12,13 +12,8 @@ export const white = "#FFFFFF";
 export const black = "#000000";
 export const grey = "#F0F3F4";
 export const lightGrey = "#FAFAFA" 
-export const darkGrey = "#787878";
+export const darkGrey = "#343a40";
 export const medGrey = "#949494";
-export const overlay = "rgba(0,0,0,0.55)";
-export const lightOverlay = "rgba(255,255,255,0.85)";
-export const blue = "#1389DF";
-export const purple = "#AC39D8";
-export const yellow = "#E2B143";
 
 //Theme
 export const global = {
@@ -29,7 +24,7 @@ export const global = {
     background: white,
     surface: white,
     backdrop: white,
-    text: black,
+    text: darkGrey,
   },
   fonts: {
     regular: {
@@ -76,7 +71,7 @@ export const global = {
 //   };
 // } else {
 export const title = { 
-  color: black,
+  color: darkGrey,
   paddingTop: 60,
   fontFamily: "DMSans_700Bold",
   fontSize: 35,
@@ -85,7 +80,7 @@ export const title = {
 };
 
 export const subtitle = {
-  color: black,
+  color: darkGrey,
   fontFamily: "SF-Semibold",
   fontSize: 25,
   justifyContent: "flex-start",
