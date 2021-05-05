@@ -27,13 +27,12 @@ const Tab = createMaterialBottomTabNavigator();
 
 StatusBar.setBarStyle("dark-content");
 
-const hostUrl = "https://vaccinenotifications.org/"
+const hostUrl = "http://192.168.0.81:3000/"
 
 function InfoScreen({route}) {
     return (
         <WebView
             source={{ uri: hostUrl }}
-
         />
     );
   }
