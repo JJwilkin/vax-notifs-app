@@ -27,7 +27,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 StatusBar.setBarStyle("dark-content");
 
-const hostUrl = "http://192.168.0.81:3000/"
+const hostUrl = "https://notify-me-el.netlify.app/"
 
 function InfoScreen({route}) {
     return (
