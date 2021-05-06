@@ -157,7 +157,7 @@ function HomeScreen({jsCode, navigation, setSignedIn}) {
             options={{
               tabBarLabel: "Dashboard",
               tabBarIcon: ({ color }) => (
-                <Entypo name="home" size={27} color={color} />
+                <Entypo name="home" size={25} color={color} />
               ),
             }}
           />
