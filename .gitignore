@@ -2,3 +2,5 @@ node_modules
 .expo
 .vscode
 .DS_Store
+google-services-prod.json
+google-services-stage.json
