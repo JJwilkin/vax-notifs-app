@@ -27,7 +27,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 StatusBar.setBarStyle("dark-content");
 
-const hostUrl = "https://notify-me-el.netlify.app/"
+const hostUrl = "https://vaccinenotifications.org/"
 
 function InfoScreen({route}) {
     return (

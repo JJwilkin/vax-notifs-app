@@ -27,7 +27,7 @@
     },
     "android": {
       "package": "com.elixirlabs.vaccinenotifications",
-      "googleServicesFile": "./google-services-stage.json",
+      "googleServicesFile": "./google-services-prod.json",
       "versionCode": 4,
       "permissions": [],
       "adaptiveIcon": {
