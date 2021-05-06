@@ -33,7 +33,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#6c6cbd"
-      }
+      },
+      "allowBackup": false
     },
     "web": {
       "favicon": "./assets/favicon.png"
