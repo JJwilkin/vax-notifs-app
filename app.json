@@ -5,7 +5,8 @@
     "version": "4.0.0",
     "orientation": "portrait",
     "notification": {
-      "icon":"./assets/notification-icon.png"
+      "icon":"./assets/android-notification.png",
+      "color": "#6c6cbd"
     },
     "icon": "./assets/icon.png",
     "splash": {
@@ -26,7 +27,7 @@
     },
     "android": {
       "package": "com.elixirlabs.vaccinenotifications",
-      "googleServicesFile": "./google-services.json",
+      "googleServicesFile": "./google-services-stage.json",
       "versionCode": 4,
       "permissions": [],
       "adaptiveIcon": {

@@ -1,8 +1,9 @@
 import Constants from 'expo-constants';
 import AppLoading from "expo-app-loading";
 import * as Notifications from 'expo-notifications';
+import { ActivityIndicator } from 'react-native-paper';
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, Platform, SafeAreaView, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Platform, SafeAreaView, Image, TouchableOpacity } from 'react-native';
 import { storeData, getData } from './helpers/AsyncHelpers';
 import {
   useFonts,
@@ -32,9 +33,7 @@ export default function Landing (props) {
             storeData("ExpoPushToken", token);
             setExpoPushToken(token);
             setLoading(false);
-
             // setNotificationsEnabled(true);
-
         })
     }
 
@@ -51,7 +50,7 @@ export default function Landing (props) {
               <Text style={styles.enableText}>To receive vaccine news please enable push notifications. </Text>
               <Text style={styles.enableText}>You can opt-out of notifications or update your preferences at any time.</Text>
             </View>
-            {loading ? <ActivityIndicator/> : 
+            {loading ? <ActivityIndicator animating={true} color={"#6c6cbd"} /> : 
             <TouchableOpacity style={styles.button} onPress={handleEnableNotifications}>
               <Text style={styles.buttonText}>Enable Notifications</Text>
             </ TouchableOpacity>
