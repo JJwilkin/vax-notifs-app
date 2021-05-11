@@ -2,7 +2,7 @@
   "expo": {
     "name": "Vaccine Notifs",
     "slug": "vax-notifications",
-    "version": "4.0.0",
+    "version": "5.0.0",
     "orientation": "portrait",
     "notification": {
       "icon":"./assets/android-notification.png",
@@ -23,12 +23,12 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.elixirlabs.vaccinenotifications",
-      "buildNumber": "4.0.0"
+      "buildNumber": "5.0.0"
     },
     "android": {
       "package": "com.elixirlabs.vaccinenotifications",
       "googleServicesFile": "./google-services-prod.json",
-      "versionCode": 4,
+      "versionCode": 5,
       "permissions": [],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
