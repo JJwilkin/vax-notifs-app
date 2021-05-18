@@ -131,7 +131,7 @@ function HomeScreen({jsCode, navigation, setSignedIn}) {
         <Tab.Navigator
           
           initialRouteName="Dashboard"
-          barStyle={{ backgroundColor: "rgb(59, 60, 212)" }}
+          barStyle={{ backgroundColor: "#254FA4" }}
           shifting={true}
           tabBarOptions={{
             activeTintColor: "#6161b5",
@@ -230,7 +230,7 @@ function HomeScreen({jsCode, navigation, setSignedIn}) {
       color: "#343a40",
     },
     button: {
-      backgroundColor: "rgb(59, 60, 212)",
+      backgroundColor: "#254FA4",
       paddingHorizontal: 24,
       paddingVertical: 16,
       borderRadius: 10,
